@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { NewTask } from './NewTask';
 import { Task } from './Task';
 import styles from './TaskBox.module.css';
 import uuid from 'react-uuid';
@@ -51,8 +52,7 @@ export function TaskBox() {
 
   return(
     <div>
-     
-     
+      <NewTask onAddTask={onAddTask}/>   
     </div>
   )
 }
