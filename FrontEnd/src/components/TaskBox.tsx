@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { NewTask } from './NewTask';
+import { NoTask } from './NoTask';
 import { Task } from './Task';
 import styles from './TaskBox.module.css';
 import uuid from 'react-uuid';
@@ -52,7 +53,37 @@ export function TaskBox() {
 
   return(
     <div>
-      <NewTask onAddTask={onAddTask}/>   
+      <NewTask onAddTask={onAddTask}/>
+
+      <div className={styles.taskBox}>
+        <header>
+          <div className={styles.createdTasks}>
+            <strong>Tarefas criadas</strong>
+            <span>{tasks.length}</span>
+          </div>
+
+          <div className={styles.completedTasks}>
+            <strong>Concluídas</strong>
+            <span>{completedTasks} de {tasks.length}</span>
+          </div>
+        </header>
+
+        {tasks.length > 0 ?
+        (tasks.map(task => {
+          return (
+            <Task 
+              key={task.id}
+              id={task.id}
+              content={task.content}
+              isCompleted={task.isCompleted}
+              onCheckTask={onChangeCheckTask}
+              onUncheckTask={onChangeCheckTask}
+              onDeleteTask={onDeleteTask}
+            />
+          )
+        })) : (<NoTask />)
+        }
+      </div>
     </div>
   )
 }
